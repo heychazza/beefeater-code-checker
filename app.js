@@ -8,7 +8,7 @@ async function loadCodes() {
         return contents.trim().split('\n');
     } catch {
         await fs.promises.writeFile('./codes.txt', '')
-        console.warn('Sorry, codes.txt doesn\'t exist, and has been created.')
+        console.log(`[BeefCrack] codes.txt doesn\'t exist, and has been created.`)
         process.exit(1)
     }
 }
@@ -93,7 +93,7 @@ async function checkCode(code, browser) {
           await element.click();
         }
     } catch {
-        console.log(`[${code}] Failed to check code.`)
+        console.log(`[BeefCrack] Failed to check '${code}'.`)
     }
 
     await page.close()
