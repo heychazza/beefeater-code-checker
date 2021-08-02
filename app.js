@@ -3,8 +3,14 @@ const fs = require('fs');
 const check = require('./check')
 
 async function loadCodes() {
-    let contents = fs.readFileSync('./codes.txt', { encoding: 'utf-8'})
-    return contents.trim().split('\n');
+    try {
+        let contents = fs.readFileSync('./codes.txt', { encoding: 'utf-8'})
+        return contents.trim().split('\n');
+    } catch {
+        await fs.promises.writeFile('./codes.txt', '')
+        console.warn('Sorry, codes.txt doesn\'t exist, and has been created.')
+        process.exit(1)
+    }
 }
 
 async function openBrowser() {
